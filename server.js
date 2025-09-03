@@ -1,0 +1,49 @@
+require('dotenv').config()
+
+const express = require('express')
+
+const app = express()
+
+const mongoose = require("mongoose")
+
+const planet = require("./models/planets.js")
+
+app.use(express.urlencoded({ extended: false }))
+
+mongoose.connect(process.env.MONGODB_URI)
+
+mongoose.connection.on("connected", () => {
+  console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
+})
+
+
+app.get("/", async (req, res) => {
+  res.render("index.ejs")
+})
+
+
+app.get("/planets/new", (req, res) => {
+  res.render("planets/new.ejs")
+})
+
+
+
+
+
+
+app.post("/planets", async (req, res) => {
+  if (req.body.isRealPlanet === "on") {
+    req.body.isRealPlanet = true
+  } else {
+    req.body.isRealPlanet = false
+  }
+  await planet.create(req.body)
+  res.redirect("/planets/new")
+})
+
+
+
+
+app.listen(3000, () => {
+  console.log('Listening on port 3000')
+})

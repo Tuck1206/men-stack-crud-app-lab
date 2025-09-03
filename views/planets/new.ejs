@@ -1,0 +1,25 @@
+<!-- views/fruits/new.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a planet</title>
+  </head>
+<body>
+  <h1>Add A New Planet!</h1>
+  <form action="/planets" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" />
+
+    <label for="isRealPlanet">Is This a real Planet?</label>
+    <input type="checkbox" name="isRealPlanet" id="isRealPlanet" />
+
+    <button type="submit">Add Planet</button>
+  </form>
+</body>
+
+
+
+</html>
