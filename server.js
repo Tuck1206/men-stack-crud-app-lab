@@ -6,7 +6,9 @@ const app = express()
 
 const mongoose = require("mongoose")
 
-const planet = require("./models/planets.js")
+const Planet = require("./models/planets.js")
+const planet = require('./models/planets.js')
+
 
 app.use(express.urlencoded({ extended: false }))
 
@@ -18,13 +20,24 @@ mongoose.connection.on("connected", () => {
 
 
 app.get("/", async (req, res) => {
-  res.render("index.ejs")
+  res.render("home.ejs")
 })
+
+app.get("/planets", async (req, res) => {
+  const allPlanets = await Planet.find()
+  res.render("planets/index.ejs", { planets: allPlanets })
+})
+
+
 
 
 app.get("/planets/new", (req, res) => {
   res.render("planets/new.ejs")
 })
+
+
+
+
 
 
 
@@ -38,7 +51,7 @@ app.post("/planets", async (req, res) => {
     req.body.isRealPlanet = false
   }
   await planet.create(req.body)
-  res.redirect("/planets/new")
+  res.redirect("/planets")
 })
 
 
