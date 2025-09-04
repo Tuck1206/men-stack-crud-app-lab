@@ -9,15 +9,14 @@
   </head>
   <body>
     <h1>Solar System</h1>
-    <ul>
+  <ul>
     <% planets.forEach(planet => { %>
-      <li><%= planet.name %></li> <br>
+      <li>
+        <a href="/planets/<%= planet._id %>"> <%= planet.name %> </a>
+      </li>
     <% }); %>
   </ul>
-
 </body>
-<a href="/">Home</a>
+<a href="/">Home</a><br>
 <a href="/planets/new">Add A New Planet</a>
-
-
 </html>
